@@ -1,15 +1,11 @@
-package main
+package goELF
 
 import (
 	"fmt"
 	"os"
 )
 
-func main() {
-	parseELF("main", "main.out")
-}
-
-func parseELF(in string, out string) {
+func ParseELF(in string, out string) {
 	// open input file
 	fin, err := os.Open(in)
 	defer fin.Close()
@@ -26,6 +22,14 @@ func parseELF(in string, out string) {
 	}
 
 	// read input file content
+	elfheader := make([]byte, 60)
+	n, _ := fin.Read(elfheader)
+
+  NewELFHeader(elfheader)
+  n = n
+
+  /*
+	// read input file content
 	buf := make([]byte, 16)
 	// line number
 	i := 0
@@ -39,6 +43,7 @@ func parseELF(in string, out string) {
 		// write into outfile
 		outputLine(fout, i, buf[:n])
 	}
+  */
 }
 
 // output fomate one line
